@@ -4,6 +4,8 @@ const express = require('express');
 var bodyParser = require('body-parser');  // this is needed to parse JSON
 const app = express();
 
+var pg = require('pg');
+
 /*
 // If not HTTPS, redirect that request to the same url but with HTTPS
 const forceSSL = function() {
@@ -37,6 +39,11 @@ app.post('/metais', function (req, res) {
 
   //console.log("Hello");
   console.log(req.body.sid);  // we use body-parser to read this
+
+  //var agentID = req.ip;
+  //var agentApp = request.headers['user-agent'],
+
+ //$Agent_IP, $Agent_App, $sysID, $sid, $skey, $aid, $data
 
   // loop the input parameters
   var answer = '';
