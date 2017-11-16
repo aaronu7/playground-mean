@@ -28,10 +28,24 @@ app.use(bodyParser.json());
 app.listen(process.env.PORT || 8080);
 
 
-// Use chrome Postman to debug these
-app.get('/metais', function (req, res) {
+// Test the database
+app.get('/db', function (request, response) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    client.query('SELECT * FROM test_table', function(err, result) {
+      done();
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('pages/db', {results: result.rows} ); }
+    });
+  });
+});
+
+
+app.get('/db', function (req, res) {
   res.send('MetaIS - GET: ' + req);
 });
+
 
 app.post('/metais', function (req, res) {
   //var id = req.query["id"];
